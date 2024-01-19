@@ -1,12 +1,12 @@
-import React from "react";
+import "./ChartTube.css";
 
 const ChartTube = () => {
   return (
-    <div>
-      <div>
-        <div></div>
+    <div className="chart-tube">
+      <div className="chart-tube__base">
+        <div className="chart-tube__fill"></div>
       </div>
-      <div>label</div>
+      <div className="chart-tube__label">label</div>
     </div>
   );
 };
