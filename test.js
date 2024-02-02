@@ -6,3 +6,4 @@ let max = tab[0];
 //   }
 // }
 console.log(Math.max(...tab));
+console.log([..."firas"][0]);
