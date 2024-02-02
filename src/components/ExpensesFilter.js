@@ -1,10 +1,14 @@
 import "./ExpensesFilter.css";
 
-const ExpensesFilter = () => {
+const ExpensesFilter = ({ options }) => {
   return (
     <div className="expenses-filter expenses-filter__control">
       <label>Filter by year</label>
-      <select>{}</select>
+      <select>
+        {options.map((opt) => {
+          return <option value={opt}>{opt}</option>;
+        })}
+      </select>
     </div>
   );
 };
