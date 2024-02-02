@@ -1,8 +1,12 @@
 import "./ChartTube.css";
 
-const ChartTube = ({ label, value, max }) => {
+const ChartTube = ({ label, value, max, sum }) => {
   let barFillHeight = "0%";
-  if (max > 0) {
+  // if (max > 0) {
+  //   barFillHeight = Math.round((value / max) * 100) + "%";
+  // }
+
+  if (sum > 0) {
     barFillHeight = Math.round((value / max) * 100) + "%";
   }
   return (
