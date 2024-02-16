@@ -1,9 +1,10 @@
+import { useState } from "react";
 import ExpenseItem from "./components/ExpenseItem";
 import Main from "./components/Main";
 import NewExpense from "./components/NewExpense/NewExpense";
 
 function App() {
-  const expenses = [
+  const oldExpenses = [
     {
       id: 1,
       title: "Education",
@@ -29,9 +30,13 @@ function App() {
       date: new Date(2025, 11, 29),
     },
   ];
+  const [expenses, setExpenses] = useState(oldExpenses);
+  const getData = (data) => {
+    setExpenses([...expenses, data]);
+  };
   return (
     <>
-      <NewExpense />
+      <NewExpense getData={getData} />
       <Main expenses={expenses} />
     </>
   );

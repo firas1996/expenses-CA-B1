@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./NewExpense.css";
-
-const NewExpense = () => {
+let id = 5;
+const NewExpense = ({ getData }) => {
   // const [title, setTitle] = useState("");
   // const [price, setPrice] = useState("");
   // const [date, setDate] = useState("");
@@ -10,6 +10,16 @@ const NewExpense = () => {
     price: "",
     date: "",
   });
+  const [isOpen, setIsOpen] = useState(false);
+  const handelOpen = () => {
+    setIsOpen(true);
+  };
+  const handelClose = () => {
+    setIsOpen(false);
+  };
+  const handelBoth = () => {
+    setIsOpen(!isOpen);
+  };
   const titleChanger = (event) => {
     // setTitle(event.target.value);
     setData((prevState) => {
@@ -40,53 +50,70 @@ const NewExpense = () => {
     // setTitle("");
     // setPrice("");
     // setDate("");
-    console.log(data);
+    getData({
+      id: id,
+      title: data.title,
+      price: +data.price,
+      date: new Date(data.date),
+    });
+    id++;
+    setData({
+      title: "",
+      price: "",
+      date: "",
+    });
   };
   return (
     <div className="new-expense">
-      <form onSubmit={submitHandler}>
-        <div className="new-expense__controls">
-          <div className="new-expense__control">
-            <label>Title</label>
-            <input
-              required
-              placeholder="Title"
-              onChange={handelAll}
-              name="title"
-              value={data.title}
-            />
+      {isOpen ? (
+        <form onSubmit={submitHandler}>
+          <div className="new-expense__controls">
+            <div className="new-expense__control">
+              <label>Title</label>
+              <input
+                required
+                placeholder="Title"
+                onChange={handelAll}
+                name="title"
+                value={data.title}
+              />
+            </div>
+            <div className="new-expense__control">
+              <label>Price</label>
+              <input
+                required
+                placeholder="Price"
+                type="number"
+                min="0"
+                step="0.001"
+                onChange={handelAll}
+                value={data.price}
+                name="price"
+              />
+            </div>
+            <div className="new-expense__control">
+              <label>Date</label>
+              <input
+                required
+                type="date"
+                min="2022-01-01"
+                max="2026-12-31"
+                onChange={handelAll}
+                value={data.date}
+                name="date"
+              />
+            </div>
           </div>
-          <div className="new-expense__control">
-            <label>Price</label>
-            <input
-              required
-              placeholder="Price"
-              type="number"
-              min="0"
-              step="0.001"
-              onChange={handelAll}
-              value={data.price}
-              name="price"
-            />
+          <div className="new-expense__actions">
+            <button type="button" onClick={handelBoth}>
+              Cancel
+            </button>
+            <button type="submit">Add Expense</button>
           </div>
-          <div className="new-expense__control">
-            <label>Date</label>
-            <input
-              required
-              type="date"
-              min="2022-01-01"
-              max="2026-12-31"
-              onChange={handelAll}
-              value={data.date}
-              name="date"
-            />
-          </div>
-        </div>
-        <div className="new-expense__actions">
-          <button>Cancel</button>
-          <button type="submit">Add Expense</button>
-        </div>
-      </form>
+        </form>
+      ) : (
+        <button onClick={handelBoth}>Add New Expense</button>
+      )}
     </div>
   );
 };
