@@ -1,8 +1,9 @@
 .main{
     background-color: #282828;
-    width: 55%;
     margin: 2rem auto;
     border-radius: 12px;
     padding: 1rem;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    width: 50rem;
+    max-width: 95%;
 }
